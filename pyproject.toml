@@ -1,0 +1,46 @@
+[project]
+name = "feature-store-101"
+version = "0.1.0"
+description = "Feature Store 101: your training data peeked at the future, and this is how you stop it"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2",
+    "pyarrow>=16.0",
+    "numpy>=1.26",
+    "scikit-learn>=1.5",
+    "matplotlib>=3.9",
+    "plotly>=5.22",
+    "streamlit>=1.38",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.5",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+feast = [
+    "feast>=0.40",       # local file offline store + sqlite online store; no server, no account
+    "duckdb>=1.0",       # optional backing for the file offline store
+]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.8",
+    "ty>=0.0.1a7",
+    "jupyter>=1.1",
+    "ipykernel>=6.29",
+    "nbconvert>=7.16",
+    "nbclient>=0.10",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "N", "B", "A", "SIM", "PTH"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

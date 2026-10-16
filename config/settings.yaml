@@ -1,0 +1,42 @@
+# feature_store_101 — single source of truth for the synthetic scenario.
+# Everything is seeded so the leakage, skew, and parity results are reproducible.
+
+seed: 7
+data_dir: data
+
+# --- entity-timestamp event stream ---------------------------------------
+n_customers: 2000
+start_date: "2024-01-01"
+n_days: 180            # length of the history in days
+window_days: 30        # the feature is "transactions in the last 30 days"
+
+# Labeled events happen on event_start_day .. event_end_day (exclusive).
+# event_start_day >= window_days so every event has a full pre-history.
+event_start_day: 40
+event_end_day: 171
+# Events on/after this day are the TRUE-FUTURE holdout (never seen in training).
+future_split_day: 135
+
+# --- transaction intensity ------------------------------------------------
+rate_low: 0.05         # low daily transaction rate (Poisson)
+rate_high: 0.80        # high daily transaction rate
+
+# --- label: depends ONLY on the as-of (point-in-time) feature -------------
+# Tuned so the honest offline AUC lands near 0.74 (the thesis number).
+label_alpha: 0.12      # logistic slope on (f_asof - mu)
+label_mu: 12.0         # logistic center (~ mean 30-day count)
+label_bias: 0.0
+
+# --- the leak -------------------------------------------------------------
+# After a positive (label==1) event, the customer's rate is multiplied by this.
+# So the LATEST feature value (what a naive join uses) encodes the outcome.
+# Tuned so the naive offline AUC lands near 0.86 and collapses to ~0.71.
+spike_factor: 1.8
+
+# --- train/serve skew demo -----------------------------------------------
+# A serving reimplementation that uses the wrong window. AUC barely notices,
+# but accuracy at the deployed threshold collapses — that is why skew is silent.
+skew_window_days: 14
+
+# --- evaluation -----------------------------------------------------------
+test_size: 0.30        # offline train/test split

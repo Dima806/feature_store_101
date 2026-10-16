@@ -78,6 +78,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.nbconvert.ipynb
 
 # IPython
 profile_default/
@@ -218,3 +219,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+.llm/
+.agents/
+agent/
+.claude/skills/
+
+# Generated datasets and local Feast artifacts (reproduced by `make data` /
+# `make feast-apply`; never committed). The outputs/ figures and JSON ARE tracked:
+# they are deliverables the article and README cite.
+/data/*
+!/data/.gitkeep
+/src/feast_demo/feature_repo/data/

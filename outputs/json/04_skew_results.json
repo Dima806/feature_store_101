@@ -1,0 +1,19 @@
+{
+  "windows": {
+    "training": 30,
+    "serving": 14
+  },
+  "disagreement_rate": 0.962,
+  "mean_abs_diff": 6.711,
+  "auc": {
+    "correct": 0.7238979764663933,
+    "divergent": 0.7038464967017295,
+    "slip": 0.020051479764663815
+  },
+  "accuracy": {
+    "correct": 0.6716666666666666,
+    "divergent": 0.5433333333333333,
+    "slip": 0.1283333333333333
+  },
+  "takeaway": "AUC barely moved, so the skew was invisible to a ranking check, but accuracy at the deployed threshold collapsed. One shared definition, materialized to the online store, removes the gap."
+}

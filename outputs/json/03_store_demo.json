@@ -1,0 +1,32 @@
+{
+  "registry": {
+    "entities": [
+      "customer"
+    ],
+    "features": [
+      "txn_count_30d"
+    ],
+    "feature_views": [
+      "customer_txn"
+    ]
+  },
+  "materialized_entities": 2000,
+  "as_of": "2024-06-28T00:00:00",
+  "sample_training_row": {
+    "customer_id": 1,
+    "event_timestamp": "2024-03-11T00:00:00",
+    "txn_count_30d": 33
+  },
+  "sample_online_lookup": {
+    "customer_id": 0,
+    "txn_count_30d": 27
+  },
+  "ministore_logic_statements": {
+    "materialize.py": 7,
+    "offline.py": 19,
+    "online.py": 28,
+    "registry.py": 37,
+    "store.py": 23
+  },
+  "ministore_total_logic_statements": 114
+}

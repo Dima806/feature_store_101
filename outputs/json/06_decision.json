@@ -1,0 +1,97 @@
+{
+  "decision": [
+    {
+      "situation": "single batch model, one owner, offline only",
+      "use": "dataframe + merge_asof",
+      "why": "the value is the as-of join; a store is overhead"
+    },
+    {
+      "situation": "reuse across models/teams, online serving, large point-in-time histories",
+      "use": "Feast (local, then a backend)",
+      "why": "managed registry, materialization/freshness, scale"
+    },
+    {
+      "situation": "genuine scale, strict latency SLAs, streaming features",
+      "use": "managed / streaming store (Feast+Redis, Tecton, SageMaker FS)",
+      "why": "operational guarantees beyond file + SQLite"
+    }
+  ],
+  "outranking_rule": "You may not need a feature store, but you always need point-in-time correctness and train/serve consistency. If you skip the store, do not skip the discipline.",
+  "measured_payoff": {
+    "offline_auc_inflation": 0.14059021214030676,
+    "future_auc_collapse": 0.15237152029100376,
+    "skew_accuracy_slip": 0.1283333333333333
+  },
+  "summary_table": [
+    {
+      "experiment": "leakage",
+      "metric": "naive offline AUC",
+      "value": 0.8644822516278093
+    },
+    {
+      "experiment": "leakage",
+      "metric": "honest offline AUC",
+      "value": 0.7238920394875026
+    },
+    {
+      "experiment": "leakage",
+      "metric": "naive future AUC",
+      "value": 0.7121107313368056
+    },
+    {
+      "experiment": "leakage",
+      "metric": "honest future AUC",
+      "value": 0.7121107313368056
+    },
+    {
+      "experiment": "leakage",
+      "metric": "inflation (naive-honest offline)",
+      "value": 0.14059021214030676
+    },
+    {
+      "experiment": "leakage",
+      "metric": "collapse (naive offline-future)",
+      "value": 0.15237152029100376
+    },
+    {
+      "experiment": "skew",
+      "metric": "feature disagreement rate",
+      "value": 0.962
+    },
+    {
+      "experiment": "skew",
+      "metric": "mean abs feature diff",
+      "value": 6.711
+    },
+    {
+      "experiment": "skew",
+      "metric": "correct-feature AUC",
+      "value": 0.7238979764663933
+    },
+    {
+      "experiment": "skew",
+      "metric": "divergent-feature AUC",
+      "value": 0.7038464967017295
+    },
+    {
+      "experiment": "skew",
+      "metric": "AUC slip (hides the skew)",
+      "value": 0.020051479764663815
+    },
+    {
+      "experiment": "skew",
+      "metric": "correct-feature accuracy",
+      "value": 0.6716666666666666
+    },
+    {
+      "experiment": "skew",
+      "metric": "divergent-feature accuracy",
+      "value": 0.5433333333333333
+    },
+    {
+      "experiment": "skew",
+      "metric": "accuracy slip (the real damage)",
+      "value": 0.1283333333333333
+    }
+  ]
+}

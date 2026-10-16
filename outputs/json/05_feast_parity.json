@@ -1,0 +1,24 @@
+{
+  "feast_available": true,
+  "feast_version": "0.67.0",
+  "parity": {
+    "rows_compared": 200,
+    "identical": true,
+    "max_abs_diff": 0
+  },
+  "config": {
+    "provider": "local",
+    "offline_store": "file",
+    "online_store": "sqlite",
+    "server": false,
+    "docker": false,
+    "account": false
+  },
+  "what_feast_adds": [
+    "managed, versioned registry + CLI (feast apply)",
+    "materialization and freshness (TTLs)",
+    "scalable offline retrieval (file/DuckDB/warehouse)",
+    "online serving infrastructure (SQLite -> Redis/DynamoDB)",
+    "feature reuse and governance across teams"
+  ]
+}

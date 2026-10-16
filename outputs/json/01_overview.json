@@ -1,0 +1,34 @@
+{
+  "thesis": "A feature store solves time and consistency, not storage.",
+  "framing": "One feature definition served two ways: historically (point-in-time) and latest (online).",
+  "two_problems": [
+    "point-in-time correctness",
+    "train/serve consistency"
+  ],
+  "three_parts": {
+    "offline_store": "timestamped history for correct training joins",
+    "online_store": "latest-value key-value lookup for fast serving",
+    "registry": "shared catalog of what each feature means"
+  },
+  "dataset_shapes": {
+    "events": [
+      2000,
+      5
+    ],
+    "feature_history": [
+      360000,
+      3
+    ],
+    "activity": [
+      133250,
+      3
+    ]
+  },
+  "example_entity": {
+    "customer_id": 572,
+    "event_time": "2024-05-03T00:00:00",
+    "point_in_time_value": 22,
+    "latest_value": 59,
+    "overstatement": 37
+  }
+}

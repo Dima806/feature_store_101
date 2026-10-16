@@ -1,0 +1,12 @@
+{
+  "auc": {
+    "naive_offline": 0.8644822516278093,
+    "honest_offline": 0.7238920394875026,
+    "naive_future": 0.7121107313368056,
+    "honest_future": 0.7121107313368056
+  },
+  "inflation": 0.14059021214030676,
+  "collapse": 0.15237152029100376,
+  "point_in_time_never_uses_future_value": true,
+  "takeaway": "The naive join inflated offline AUC by leaking post-event behaviour; on a true-future holdout the inflation vanished and the naive model fell to the honest model's level. The gap was leakage, not skill."
+}
